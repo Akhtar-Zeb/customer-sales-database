@@ -44,18 +44,20 @@ def customers(inputfile):
     
     # Open file for write mode
     with open(output_file, "w") as outfile:
-        writer = csv.writer(outfile)
+        writer = csv.writer(outfile, lineterminator='\n')
         # Give file a Header row
         writer.writerow(["customer_id", "customer_name", "customer_location"])
 
         # Parse clean data list
         for line in clean_data:
+            # Remove extra character from line
             # check if line is greater or equal to 3 parts if it is only write three parts
             if len(line) >= 3:
-                writer.writerow(line[:3])
+                location = " ".join(line[2:])
+                writer.writerow([line[0].strip(), line[1].strip(), location.strip()])
             # check if line equal to two then add empty field
             elif len(line) == 2:
-                writer.writerow(line + [""])
+                writer.writerow([line[0].strip(), line[1].strip(), ""])
 
 def products(inputfile):
     # Save output file to clean_data folder
@@ -75,7 +77,7 @@ def products(inputfile):
     
     # Open file for write mode
     with open(output_file, "w") as outfile:
-        writer = csv.writer(outfile)
+        writer = csv.writer(outfile, lineterminator='\n')
         # Give file a Header row
         writer.writerow(["product_id", "product_name", "product_rate"])
 
