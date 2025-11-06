@@ -15,4 +15,5 @@ Result: Clean, perfectly aligned CSV - ready for Excel or SQl
 3) Remove blanks, rename headers, and fix numeric errors.
 4) Change column types or filter invalid rows to load cleanly
 
-## 
+## using with Excel
+1) Remove blank and null using filtering and sorting
