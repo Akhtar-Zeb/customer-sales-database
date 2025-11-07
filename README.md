@@ -21,4 +21,6 @@ Result: Clean, perfectly aligned CSV - ready for Excel or SQl
 
 ## Using SQL for more processing the data
 
-### First use bash and postgres SQL enter clean data to database for furthur prossing
+### First use python script and  SQLite3 to enter clean data to database for furthur prossing
+* I Create SQLite3 Database then create table acording to data.
+* Here i use python script to to insert data to SQLLite3 table
