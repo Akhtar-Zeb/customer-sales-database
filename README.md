@@ -25,4 +25,4 @@ Result: Clean, perfectly aligned CSV - ready for Excel or SQl
 * I Create SQLite3 Database then create table acording to data.
 * Here i use python script to insert data to SQLLite3 table.
 * I process the data in SQL for NULL, EMPTY ROW, NILL and remove it.
-* Now the data is clean
+* Now the data is clean for analyze phase.
