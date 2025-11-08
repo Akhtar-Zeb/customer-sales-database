@@ -35,7 +35,7 @@ Created a relational database with **three tables**:
 
 Each table was created with proper **primary keys** and **foreign key relationships**.
 
-#### 🐘 PostgreSQL / 🪶 SQLite Schema
+#### 🪶 SQLite Schema
 ```sql
 CREATE TABLE customer (
     customer_id INTEGER PRIMARY KEY,
