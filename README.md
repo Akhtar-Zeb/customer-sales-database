@@ -1,28 +1,62 @@
-# Prapare & Process Data
+# 🧾 Customer Sales Database Project
 
-## Using Python
-I write a Python script for this it do the following thinks.
-1) Using re.split(r'\s{2,}', line) to separate by 2+ spaces
-2) Remove extra spaces and tabs
-3) Hidden characters ('\n')
-4) Blank lines
-5) Avoid extra blank rows in the csv (lineterminator='\n')
+## Overview
+This project demonstrates the complete workflow of **data cleaning**, **database design**, and **data loading automation** using both **Python** and **SQL**.  
+It simulates a real-world system where a company manages customer information, product catalogs, and sales transactions.
 
-Result: Clean, perfectly aligned CSV - ready for Excel or SQl
+---
 
-## Using Excel (Power Query) to clean data
-1) Import text files via Data → Get Data → From Text/CSV.
-2) Split by two spaces and trim/clean columns.
-3) Remove blanks, rename headers, and fix numeric errors.
-4) Change column types or filter invalid rows to load cleanly
+## Project Steps
 
-## using Excel to more clean the data
-1) Remove blank and null using filtering and sorting
+### Data Cleaning
+- Raw data contained:
+  - Extra spaces and no clear delimiters.
+  - Inconsistent spacing.
+  - Missing or invalid values such as `NILL`.
+- Cleaned using:
+  - **Python (Regex + CSV)**
+  - **Excel Power Query**
 
-## Using SQL for more processing the data
+**Key tasks performed:**
+- Removed hidden spaces and blank lines.
+- Split text correctly into columns.
+- Merged extra columns.
+- Sorted and removed duplicates.
+- Logged invalid or skipped rows.
+- Exported to `clean.csv`.
 
-### First use python script and  SQLite3 to enter clean data to database for furthur prossing
-* I Create SQLite3 Database then create table acording to data.
-* Here i use python script to insert data to SQLLite3 table.
-* I process the data in SQL for NULL, EMPTY ROW, NILL and remove it.
-* Now the data is clean for analyze phase.
+---
+
+### 2️⃣ Database Setup
+Created a relational database with **three tables**:
+- `customer`  
+- `product`  
+- `transactions`
+
+Each table was created with proper **primary keys** and **foreign key relationships**.
+
+#### 🐘 PostgreSQL / 🪶 SQLite Schema
+```sql
+CREATE TABLE customer (
+    customer_id INTEGER PRIMARY KEY,
+    customer_name TEXT NOT NULL,
+    location TEXT
+);
+
+CREATE TABLE product (
+    product_id INTEGER PRIMARY KEY,
+    product_name TEXT NOT NULL,
+    product_rate REAL
+);
+
+CREATE TABLE transactions (
+    transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    unit_sales INTEGER,
+    product_rate REAL,
+    total_sale REAL,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE
+);
+
