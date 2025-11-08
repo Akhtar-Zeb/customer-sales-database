@@ -23,9 +23,9 @@ def main():
 # Clean customer(CUST.txt) text file
 def customers(inputfile):
     # make sure folder is exist
-    os.makedirs("clean_data_using_powerquary", exist_ok=True)
+    os.makedirs("clean_data", exist_ok=True)
     # Save output file to clean_data folder
-    output_file = f"clean_data_using_powerquary/customers_clean.csv"
+    output_file = f"clean_data/customers_clean.csv"
 
     # Create Empty list for clean data
     clean_data = []
@@ -47,6 +47,9 @@ def customers(inputfile):
 
         # Parse clean data list
         for line in clean_data:
+            # Validate Data
+            if not line[0].isdigit() or line[1] == "NILL" or line[1].strip() == "":
+                continue
             # Remove extra character from line
             # check if line is greater or equal to 3 parts if it is only write three parts
             if len(line) >= 3:
@@ -58,9 +61,9 @@ def customers(inputfile):
 
 def products(inputfile):
     # make sure folder is exist
-    os.makedirs("clean_data_using_powerquary", exist_ok=True)
+    os.makedirs("clean_data", exist_ok=True)
     # Save output file to clean_data folder
-    output_file = f"clean_data_using_powerquary/products_clean.csv"
+    output_file = f"clean_data/products_clean.csv"
 
     # Create Empty list for clean data
     clean_data = []
@@ -70,7 +73,6 @@ def products(inputfile):
         for line in infile:
             # Split line by two are more space
             parts = re.split(r'\s{2,}', line.strip())
-
             # append parts to list
             clean_data.append(parts)
     
@@ -82,6 +84,18 @@ def products(inputfile):
 
         # Parse clean data list
         for line in clean_data:
+            if len(line) < 3:
+                continue
+            # Validate Data
+            if not line[0].isdigit():
+                print(line)
+                continue
+            if line[2] == "NILL" or line[2].strip == "":
+                print(line)
+                continue
+            if not line[2].isdigit() or line[2] == "0":
+                print(line)
+                continue
             # check if line is greater or equal to 3 parts if it is only write three parts
             if len(line) >= 3:
                 writer.writerow(line[:3])
@@ -91,9 +105,9 @@ def products(inputfile):
 
 def transactions(inputfile):
     # make sure folder is exist
-    os.makedirs("clean_data_using_powerquary", exist_ok=True)
+    os.makedirs("clean_data", exist_ok=True)
     # Save output file to clean_data folder
-    output_file = f"clean_data_using_powerquary/transactions_clean.csv"
+    output_file = f"clean_data/transactions_clean.csv"
 
     # Create Empty list for clean data
     clean_data = []
@@ -115,6 +129,9 @@ def transactions(inputfile):
 
         # Parse clean data list
         for line in clean_data:
+            # Validate data
+            if not any(char.isdigit() for char in line):
+                continue
             # check if line is greater or equal to 3 parts if it is only write three parts
             if len(line) >= 6:
                 writer.writerow(line[:6])
