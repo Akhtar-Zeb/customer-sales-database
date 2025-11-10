@@ -13,12 +13,12 @@ while True:
     else:
         print(f"Company {company_name} not in list.")
 
-files_list = ["CUST.txt", "PROD.txt", "TRANBNS.txt", "TRANBSRET.txt", "TRANS.txt", "TRANSRET.txt"]
+file_list = ["CUST.txt", "PROD.txt", "TRANBNS.txt", "TRANBSRET.txt", "TRANS.txt", "TRANSRET.txt"]
 
 while True:
     #Prompt for file name
     file_name = input("Enter file name: ").strip()
-    if file_name in files_list:
+    if file_name in file_list:
         break
     else:
         print(f"File {file_name} not in list.")
