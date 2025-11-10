@@ -4,18 +4,17 @@ import re
 import csv
 
 def main():
-    # Ask for file path
-    input_file = input("Enter file path: ").strip()
+    file_path = input("Enter file path: ").strip()
     # Split file path and name
-    file_name = os.path.basename(input_file)
+    file_name = os.path.basename(file_path)
 
     # Check name and send it to specific function
     if file_name == "CUST.txt":
-        customers(input_file)
+        customers(file_path)
     elif file_name == "PROD.txt":
-        products(input_file)
+        products(file_path)
     elif file_name == "TRANS.txt":
-        transactions(input_file)
+        transactions(file_path)
     else:
         print("File not found.")
 
@@ -60,6 +59,7 @@ def customers(inputfile):
                 writer.writerow([line[0].strip(), line[1].strip(), ""])
 
 def products(inputfile):
+    company_name = input("Enter company name: ").strip().title()
     # make sure folder is exist
     os.makedirs("clean_data", exist_ok=True)
     # Save output file to clean_data folder
@@ -80,7 +80,7 @@ def products(inputfile):
     with open(output_file, "w") as outfile:
         writer = csv.writer(outfile, lineterminator='\n')
         # Give file a Header row
-        writer.writerow(["product_id", "product_name", "product_rate"])
+        writer.writerow(["product_id", "company_name", "product_name", "product_rate"])
 
         # Parse clean data list
         for line in clean_data:
@@ -95,12 +95,14 @@ def products(inputfile):
                 continue
             # check if line is greater or equal to 3 parts if it is only write three parts
             if len(line) >= 3:
-                writer.writerow(line[:3])
+                writer.writerow([line[0], f'{company_name}', line[1].title(), line[2]])
             # check if line equal to two then add empty field
             elif len(line) == 2:
-                writer.writerow(line + [""])
+                writer.writerow([line[0], f'{company_name}', line[1].title(), ""])
 
 def transactions(inputfile):
+    month = input("Enter month of data Example: 'jan': ").strip().title()
+    year = input("Enter year of data Example: '2025': ").strip()
     # make sure folder is exist
     os.makedirs("clean_data", exist_ok=True)
     # Save output file to clean_data folder
@@ -122,7 +124,7 @@ def transactions(inputfile):
     with open(output_file, "w") as outfile:
         writer = csv.writer(outfile, lineterminator='\n')
         # Give file a Header row
-        writer.writerow(["customer_id", "product_id", "unit_sale", "product_rate", "total_amount"])
+        writer.writerow(["customer_id", "product_id", "sale_month", "sale_year" "unit_sale", "product_rate", "total_amount"])
 
         # Parse clean data list
         for line in clean_data:
@@ -131,10 +133,10 @@ def transactions(inputfile):
                 continue
             # check if line is greater or equal to 3 parts if it is only write three parts
             if len(line) >= 6:
-                writer.writerow(line[:6])
+                writer.writerow([line[0], line[1], f'{month}', f'{year}', line[2], line[3], line[4], line[5]])
             # check if line equal to two then add empty field
             elif len(line) == 5:
-                writer.writerow(line + [""])
+                writer.writerow([line[0], line[1], f'{month}', f'{year}', line[2], line[3], line[4], ""])
 
 
 

@@ -29,22 +29,23 @@ It simulates a real-world system where a company manages customer information, p
 
 ### 2️⃣ Database Setup
 Created a relational database with **three tables**:
-- `customer`  
-- `product`  
+- `customers`  
+- `products`  
 - `transactions`
 
 Each table was created with proper **primary keys** and **foreign key relationships**.
 
 #### 🪶 SQLite Schema
 ```sql
-CREATE TABLE customer (
+CREATE TABLE customers (
     customer_id INTEGER PRIMARY KEY,
     customer_name TEXT NOT NULL,
     location TEXT
 );
 
-CREATE TABLE product (
+CREATE TABLE products (
     product_id INTEGER PRIMARY KEY,
+    company_name TEXT NOT NULL,
     product_name TEXT NOT NULL,
     product_rate REAL
 );
@@ -53,10 +54,12 @@ CREATE TABLE transactions (
     transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
     customer_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
+    sale_month TEXT NOT NULL,
+    sale_year TEXT NOT NULL,
     unit_sales INTEGER,
     product_rate REAL,
     total_sale REAL,
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 );
 
