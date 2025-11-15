@@ -1,4 +1,4 @@
-customer_id,product_id,sale_month,sale_year,unit_return,product_rate,total_return_amount
+customer_id,product_id,sale_month,sale_year,unit_sale_bonus,product_rate,total_bonus_amount
 22,25,April,2025,1,118.15,118.15
 30,3,April,2025,6,324.7,1948.2
 30,8406,April,2025,1,92,92
